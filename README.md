@@ -7,7 +7,7 @@
 </div>
 <br>
 
-### Short Description
+### A weather dashboard featuring current conditions and 5-day forecast
 
 ![Demo](./Assets/Images/demo.gif)
 
@@ -16,13 +16,15 @@ Currently deployed at [GitHub Pages](https://joeldore.github.io/Weather-Dashboar
 ---
 ## Features
 
-- 
-- 
-- 
----
+- Provides current and future forecasts for a given city using data from [OpenWeather API](https://openweathermap.org/api)
 
+- Search history is saved locally to display a dynamically updated list of recent cities
+
+---
 ## Reflection
+
 - 
+
 - 
 
 ---
