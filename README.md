@@ -11,7 +11,7 @@
 
 ![Demo](./Assets/Images/demo.gif)
 
-Currently deployed at [GitHub Pages](https://joeldore.github.i/Weather-Dashboard/)
+Currently deployed at [GitHub Pages](https://joeldore.github.io/Weather-Dashboard/)
 
 ---
 ## Features
