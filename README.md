@@ -23,14 +23,14 @@ Currently deployed at [GitHub Pages](https://joeldore.github.io/Weather-Dashboar
 ---
 ## Reflection
 
-- 
+- Writing functions with reusability in mind helped the entire process of structuring my logic and making it more readable
 
-- 
+- [Day.js](https://day.js.org/) objects are immutable, which made them much easier to manipulate/reformat than when I have used [Moment.js](https://momentjs.com/) on previous projects
 
 ---
 ## Future Development
 
-- 
+- Add option for user to remove items from search history
 
 ---
 ## <img src="https://icon-library.com/images/license-icon/license-icon-17.jpg" width="28"> License
