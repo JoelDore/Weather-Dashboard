@@ -41,12 +41,16 @@ function getCurrent(cityName) {
         url: queryURL,
         method: 'GET'
     }).then((response) => {
-        // getIcon(code) --> img tag src
+        const iconUrl = getIcon(response.weather[0].icon);
+        // url --> img tag src
         // Update #currentCityIcon: $('#currentCityIcon').prepend('City <img> ');
         // Update #temp text
         // Update #humidity text
         // Update #windSpeed text
-        // getUVIndex(lat,lon)
+
+        const lat = response.coord.lat;
+        const lon = response.coord.lon;
+        getUVIndex(lat, lon)
     });
 };
 
@@ -68,14 +72,20 @@ function getForecast(cityName) {
 };
 
 function getIcon(code) {
-    // get URL from icon code
-    // return URL
+    // get URL from icon code and return
+    return `http://openweathermap.org/img/wn/${code}@2x.png`;
 };
 
 function getUVIndex(lat, lon) {
     // get value
-    // update #uvIndex text
-    // add appropriate color class
+    const queryURL = `https://api.openweathermap.org/data/2.5/uvi?lat=${lat}&lon=${lon}&appid=d805afa702cbd0d0da430b05b58308fc`;
+    $.ajax({
+        url: queryURL,
+        method: 'GET'
+    }).then((response) => {
+        // update #uvIndex text
+        // add appropriate color class
+    });
 };
 
 // My API key: 'd805afa702cbd0d0da430b05b58308fc'
