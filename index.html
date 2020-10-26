@@ -30,15 +30,15 @@
                         </button>
                     </div>
                 </div>
-                <div class="list-group" id="searchHistory">
-                    <button type="button" class="list-group-item list-group-item-action">Previous search string</button>
+                <div class="list-group mb-4" id="searchHistory">
+                    <button type="button" class="list-group-item list-group-item-action">(previous search)</button>
                 </div>
             </div>
 
             <div class="col-md-9">
                 <div class="card">
                     <div class="card-body">
-                        <h2 class="card-title">City -icon- <span class="text-muted" id="currentDate">M/DD/YYYY</span>
+                        <h2 class="card-title" id="currentCityIcon"><span class="text-muted" id="currentDate"></span>
                         </h2>
                         <br>
                         <p>Temperature: <span id="temp"></span></p>
@@ -52,31 +52,31 @@
                 <div class="card-deck">
                     <div class="card p-2 bg-primary text-light" id="day-1">
                         <h5>M/DD</h5><br>
-                        <p><i>-icon-</i></p>
+                        <p>-icon-</p>
                         <p>Temp: </p>
                         <p>Humidity: </p>
                     </div>
                     <div class="card p-2 bg-primary text-light" id="day-2">
                         <h5>M/DD</h5><br>
-                        <p><i>-icon-</i></p>
+                        <p>-icon-</p>
                         <p>Temp: </p>
                         <p>Humidity: </p>
                     </div>
                     <div class="card p-2 bg-primary text-light" id="day-3">
                         <h5>M/DD</h5><br>
-                        <p><i>-icon-</i></p>
+                        <p>-icon-</p>
                         <p>Temp: </p>
                         <p>Humidity: </p>
                     </div>
                     <div class="card p-2 bg-primary text-light" id="day-4">
                         <h5>M/DD</h5><br>
-                        <p><i>-icon-</i></p>
+                        <p>-icon-</p>
                         <p>Temp: </p>
                         <p>Humidity: </p>
                     </div>
                     <div class="card p-2 bg-primary text-light" id="day-5">
                         <h5>M/DD</h5><br>
-                        <p><i>-icon-</i></p>
+                        <p>-icon-</p>
                         <p>Temp: </p>
                         <p>Humidity: </p>
                     </div>
@@ -88,6 +88,8 @@
 
     <!-- jQuery Library -->
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+    <!-- Day.js -->
+    <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
     <!-- Bootstrap JavaScript -->
     <script src='https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js'
         integrity='sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx'
