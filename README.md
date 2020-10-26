@@ -32,6 +32,8 @@ Currently deployed at [GitHub Pages](https://joeldore.github.io/Weather-Dashboar
 
 - Add option for user to remove items from search history
 
+- Add option for user to select Metric or Imperial units
+
 ---
 ## <img src="https://icon-library.com/images/license-icon/license-icon-17.jpg" width="28"> License
 This project is [MIT](https://github.com/JoelDore/Weather-Dashboard/blob/main/LICENSE) licensed.  
