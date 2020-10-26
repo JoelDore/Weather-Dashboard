@@ -12,45 +12,59 @@ $(".list-group-item").click((event) => {
 });
 
 // Event listener for searchBtn
-$("#searchBtn").click((event) => {
-    handleSearch($(event.target).text());
+$("#searchBtn").click(() => {
+    let cityName = $('#searchText').val();
+    handleSearch(cityName);
+    $('#searchText').val(''); // Clear search field
 });
 
-function handleSearch(cityString) {
+function handleSearch(cityName) {
     // update lastSearchedCity in localStorage
-    updateSearchHistory(cityString);
-    getCurrent(cityString);
-    getForecast(cityString);
+    // updateSearchHistory(cityName);
+    getCurrent(cityName);
+    getForecast(cityName);
 };
 
-function updateSearchHistory(cityString) {
+function updateSearchHistory(cityName) {
     // Create new <>button.list-group-item.list-group-item-action
-    // Add 'cityString' text
+    // Add 'cityName' text
     // Prepend to #searchHistory div
 
     // IF $('#searchHistory').children().length > maxHistoryItems
     // THEN pop last element of children array
 };
 
-function getCurrent(cityString) {
+function getCurrent(cityName) {
     // $.ajax - Get current data
-    // getIcon(code) --> img tag src
-    // Update #currentCityIcon: $('#currentCityIcon').prepend('City <img> ');
-    // Update #temp text
-    // Update #humidity text
-    // Update #windSpeed text
-    // getUVIndex(lat,lon)
+    const queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=imperial&appid=d805afa702cbd0d0da430b05b58308fc`
+    $.ajax({
+        url: queryURL,
+        method: 'GET'
+    }).then((response) => {
+        // getIcon(code) --> img tag src
+        // Update #currentCityIcon: $('#currentCityIcon').prepend('City <img> ');
+        // Update #temp text
+        // Update #humidity text
+        // Update #windSpeed text
+        // getUVIndex(lat,lon)
+    });
 };
 
-function getForecast(cityString) {
+function getForecast(cityName) {
     // $.ajax - Get 5-day forecast data
-    // FOR loop over API data array
+    const queryURL = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&cnt=5&units=imperial&appid=d805afa702cbd0d0da430b05b58308fc`;
+    $.ajax({
+        url: queryURL,
+        method: 'GET'
+    }).then((response) => {
+        // FOR loop over API data array:
 
-    // $(`#day-${index}`).append( {
-    // // date: <h5> today.add(i+1, 'day').format(M/DD), <br>
-    // // icon: <img> src = getIcon(code),
-    // // temp: <p>,
-    // // humidity: <p> } )
+        // $(`#day-${index}`).append( {
+        // // date: <h5> today.add(i+1, 'day').format(M/DD), <br>
+        // // icon: <img> src = getIcon(code),
+        // // temp: <p>,
+        // // humidity: <p> } )
+    });
 };
 
 function getIcon(code) {
@@ -63,3 +77,5 @@ function getUVIndex(lat, lon) {
     // update #uvIndex text
     // add appropriate color class
 };
+
+// My API key: 'd805afa702cbd0d0da430b05b58308fc'
