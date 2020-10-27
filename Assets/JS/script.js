@@ -93,7 +93,7 @@ function getForecastWeather(cityName) {
 
 function getIconElement(code) {
     const iconUrl = `http://openweathermap.org/img/wn/${code}@2x.png`;
-    return `<img src="${iconUrl}">`
+    return `<img src="${iconUrl}" style="width:100px">`
 };
 
 function getUVIndex(lat, lon) {
