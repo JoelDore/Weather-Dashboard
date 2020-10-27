@@ -83,7 +83,9 @@ function getForecastWeather(cityName) {
             const iconEl = getIconElement(daysArray[i].weather[0].icon);
             const tempEl = $("<p>").html(`Temp: ${temp}&deg;F`)
             const humidityEl = $("<p>").html(`Humidity: ${humidity}%`)
-            // append elements to current card in forecast
+            // clear card content
+            $(`#day-${i + 1}`).html('');
+            // append elements to card
             $(`#day-${i + 1}`).append(dateEl).append(iconEl).append(tempEl).append(humidityEl)
         };
     });
@@ -114,7 +116,5 @@ function colorUVIndex(value) {
         currentUviEl.attr('class', 'btn btn-sm btn-warning')
     } else {
         currentUviEl.attr('class', 'btn btn-sm btn-danger')
-    }
-}
-
-// My API key: 'd805afa702cbd0d0da430b05b58308fc'
+    };
+};
