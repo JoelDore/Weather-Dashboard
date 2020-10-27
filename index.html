@@ -23,7 +23,7 @@
             <div class="col-md-3 bg-light">
                 <div class="input-group mb-4">
                     <input type="text" class="form-control" placeholder="Search for a City" aria-label="City name"
-                        aria-describedby="searchBtn" id="searchText">
+                        aria-describedby="searchBtn" id="searchInput">
                     <div class="input-group-append">
                         <button class="btn btn-primary" type="button" id="searchBtn">
                             <i class="fas fa-search"></i>
@@ -38,13 +38,15 @@
             <div class="col-md-9">
                 <div class="card">
                     <div class="card-body">
-                        <h2 class="card-title" id="currentCityIcon"><span class="text-muted" id="currentDate"></span>
+                        <h2 class="card-title">
+                            <span id="currentCity"></span>
+                            <span id="currentIcon"></span>
+                            <span class="text-muted" id="currentDate"></span>
                         </h2>
-                        <br>
-                        <p>Temperature: <span id="temp"></span></p>
-                        <p>Humidity: <span id="humidity"></span></p>
-                        <p>Wind Speed: <span id="windSpeed"></span></p>
-                        <p>UV Index: <button disabled class="btn btn-sm btn-success" id="uvIndex">0.00 %</button></p>
+                        <p>Temperature: <span id="temp"></span> &deg;F</p>
+                        <p>Humidity: <span id="humidity"></span>%</p>
+                        <p>Wind Speed: <span id="windSpeed"></span> mph</p>
+                        <p>UV Index: <button disabled class="btn btn-sm btn-success" id="uvIndex"></button></p>
                     </div>
                 </div>
                 <br>

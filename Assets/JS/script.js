@@ -1,10 +1,17 @@
-let today = dayjs();
+const today = dayjs();
+const searchInputEl = $("#searchInput");
+const searchBtn = $("#searchBtn");
+const currentCityEl = $("#currentCity");
+const currentIconEl = $("#currentIcon");
+const currentDateEl = $('#currentDate');
+const currentTempEl = $("#temp");
+const currentHumidityEl = $("#humidity");
+const currentWindSpeedEl = $("#windSpeed");
+const currentUviEl = $("#uvIndex");
+
+const MAX_HISTORY_ITEMS = 10;
+
 let lastSearchedCity = '';
-let maxHistoryItems = 10;
-
-// Set date in Current
-$('#currentDate').text(today.format('M/DD/YYYY'));
-
 
 // Event listener for #searchHistory li
 $(".list-group-item").click((event) => {
@@ -12,17 +19,17 @@ $(".list-group-item").click((event) => {
 });
 
 // Event listener for searchBtn
-$("#searchBtn").click(() => {
-    let cityName = $('#searchText').val();
+searchBtn.click(() => {
+    let cityName = searchInputEl.val();
     handleSearch(cityName);
-    $('#searchText').val(''); // Clear search field
+    searchInputEl.val(''); // Clear search field
 });
 
 function handleSearch(cityName) {
     // update lastSearchedCity in localStorage
     // updateSearchHistory(cityName);
-    getCurrent(cityName);
-    getForecast(cityName);
+    getCurrentWeather(cityName);
+    getForecastWeather(cityName);
 };
 
 function updateSearchHistory(cityName) {
@@ -34,27 +41,32 @@ function updateSearchHistory(cityName) {
     // THEN pop last element of children array
 };
 
-function getCurrent(cityName) {
-    // $.ajax - Get current data
+function getCurrentWeather(cityName) {
     const queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=imperial&appid=d805afa702cbd0d0da430b05b58308fc`
     $.ajax({
         url: queryURL,
         method: 'GET'
     }).then((response) => {
-        const iconUrl = getIcon(response.weather[0].icon);
-        // url --> img tag src
-        // Update #currentCityIcon: $('#currentCityIcon').prepend('City <img> ');
-        // Update #temp text
-        // Update #humidity text
-        // Update #windSpeed text
-
+        const city = response.name;
+        const newIcon = getIconElement(response.weather[0].icon);
+        const temp = response.main.temp;
+        const humidity = response.main.humidity;
+        const windSpeed = response.wind.speed;
         const lat = response.coord.lat;
         const lon = response.coord.lon;
-        getUVIndex(lat, lon)
+
+        currentCityEl.text(city);
+        currentIconEl.html(newIcon);
+        currentDateEl.text(today.format('M/DD/YYYY'));
+        currentTempEl.text(temp);
+        currentHumidityEl.text(humidity);
+        currentWindSpeedEl.text(windSpeed);
+        getUVIndex(lat, lon);
+        colorUVIndex();
     });
 };
 
-function getForecast(cityName) {
+function getForecastWeather(cityName) {
     // $.ajax - Get 5-day forecast data
     const queryURL = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&cnt=5&units=imperial&appid=d805afa702cbd0d0da430b05b58308fc`;
     $.ajax({
@@ -65,27 +77,30 @@ function getForecast(cityName) {
 
         // $(`#day-${index}`).append( {
         // // date: <h5> today.add(i+1, 'day').format(M/DD), <br>
-        // // icon: <img> src = getIcon(code),
+        // // icon: getIconElement(code)
         // // temp: <p>,
         // // humidity: <p> } )
     });
 };
 
-function getIcon(code) {
+function getIconElement(code) {
     // get URL from icon code and return
-    return `http://openweathermap.org/img/wn/${code}@2x.png`;
+    const iconUrl = `http://openweathermap.org/img/wn/${code}@2x.png`;
+    return `<img src="${iconUrl}">`
 };
 
 function getUVIndex(lat, lon) {
-    // get value
     const queryURL = `https://api.openweathermap.org/data/2.5/uvi?lat=${lat}&lon=${lon}&appid=d805afa702cbd0d0da430b05b58308fc`;
     $.ajax({
         url: queryURL,
         method: 'GET'
     }).then((response) => {
         // update #uvIndex text
-        // add appropriate color class
     });
 };
+
+function colorUVIndex() {
+    // add appropriate color class
+}
 
 // My API key: 'd805afa702cbd0d0da430b05b58308fc'
