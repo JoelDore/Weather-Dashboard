@@ -11,6 +11,8 @@ const currentUviEl = $("#uvIndex");
 
 const MAX_HISTORY_ITEMS = 10;
 
+// Get search history from local storage
+let searchHistoryArray = JSON.parse(localStorage.getItem('searchHistory')) || [];
 let lastSearchedCity = '';
 
 // Event listener for #searchHistory li
@@ -26,19 +28,21 @@ searchBtn.click(() => {
 });
 
 function handleSearch(cityName) {
-    // update lastSearchedCity in localStorage
-    // updateSearchHistory(cityName);
+    updateSearchHistory(cityName);
+    // Execute search
     getCurrentWeather(cityName);
     getForecastWeather(cityName);
 };
 
 function updateSearchHistory(cityName) {
+    searchHistoryArray.unshift(cityName);
+    // ** IF $('#searchHistory').children().length > maxHistoryItems
+    // ** THEN pop last element of children array
+    localStorage.setItem('searchHistory', searchHistoryArray);
     // Create new <>button.list-group-item.list-group-item-action
     // Add 'cityName' text
     // Prepend to #searchHistory div
 
-    // IF $('#searchHistory').children().length > maxHistoryItems
-    // THEN pop last element of children array
 };
 
 function getCurrentWeather(cityName) {
