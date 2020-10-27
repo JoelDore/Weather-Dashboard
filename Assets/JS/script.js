@@ -74,18 +74,18 @@ function getForecastWeather(cityName) {
         const daysArray = response.list
         // FOR loop over API data array:
         for (let i = 0; i < daysArray.length; i++) {
-
+            // get relevant data
             const date = today.add(i + 1, 'day').format('M/DD');
-            const icon = getIconElement(daysArray[i].weather[0].icon);
             const temp = daysArray[i].main.temp;
             const humidity = daysArray[i].main.humidity;
-
-            // $(`#day-${index}`).append( {
-            // // date: <h5> + <br>
-            // // icon: getIconElement(code)
-            // // temp: <p>
-            // // humidity: <p> } )
-        }
+            // create elements to append
+            const dateEl = $("<h5>").text(date);
+            const iconEl = getIconElement(daysArray[i].weather[0].icon);
+            const tempEl = $("<p>").html(`Temp: ${temp}&deg;F`)
+            const humidityEl = $("<p>").html(`Humidity: ${humidity}%`)
+            // append elements to current card in forecast
+            $(`#day-${i + 1}`).append(dateEl).append(iconEl).append(tempEl).append(humidityEl)
+        };
     });
 };
 
