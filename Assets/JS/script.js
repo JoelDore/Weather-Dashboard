@@ -1,6 +1,7 @@
 const today = dayjs();
 const searchInputEl = $("#searchInput");
 const searchBtn = $("#searchBtn");
+const searchHistoryEl = $("#searchHistory");
 const currentCityEl = $("#currentCity");
 const currentIconEl = $("#currentIcon");
 const currentDateEl = $('#currentDate');
@@ -13,6 +14,7 @@ const MAX_HISTORY_ITEMS = 10;
 
 // Get search history from local storage
 let searchHistoryArray = JSON.parse(localStorage.getItem('searchHistory')) || [];
+updateSearchHistory();
 let lastSearchedCity = '';
 
 // Event listener for #searchHistory li
@@ -28,20 +30,25 @@ searchBtn.click(() => {
 });
 
 function handleSearch(cityName) {
+    searchHistoryArray.unshift(cityName);
     updateSearchHistory(cityName);
     // Execute search
     getCurrentWeather(cityName);
     getForecastWeather(cityName);
 };
 
-function updateSearchHistory(cityName) {
-    searchHistoryArray.unshift(cityName);
+function updateSearchHistory() {
     // ** IF $('#searchHistory').children().length > maxHistoryItems
     // ** THEN pop last element of children array
-    localStorage.setItem('searchHistory', searchHistoryArray);
-    // Create new <>button.list-group-item.list-group-item-action
-    // Add 'cityName' text
-    // Prepend to #searchHistory div
+    localStorage.setItem('searchHistory', JSON.stringify(searchHistoryArray));
+
+    searchHistoryEl.html('');
+
+    for (const city of searchHistoryArray) {
+        const newHistoryEl = $('<button type="button" class="list-group-item list-group-item-action">');
+        newHistoryEl.text(city);
+        searchHistoryEl.append(newHistoryEl)
+    }
 
 };
 
