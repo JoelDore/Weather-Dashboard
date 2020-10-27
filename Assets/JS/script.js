@@ -66,24 +66,30 @@ function getCurrentWeather(cityName) {
 };
 
 function getForecastWeather(cityName) {
-    // $.ajax - Get 5-day forecast data
     const queryURL = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&cnt=5&units=imperial&appid=d805afa702cbd0d0da430b05b58308fc`;
     $.ajax({
         url: queryURL,
         method: 'GET'
     }).then((response) => {
+        const daysArray = response.list
         // FOR loop over API data array:
+        for (let i = 0; i < daysArray.length; i++) {
 
-        // $(`#day-${index}`).append( {
-        // // date: <h5> today.add(i+1, 'day').format(M/DD), <br>
-        // // icon: getIconElement(code)
-        // // temp: <p>,
-        // // humidity: <p> } )
+            const date = today.add(i + 1, 'day').format('M/DD');
+            const icon = getIconElement(daysArray[i].weather[0].icon);
+            const temp = daysArray[i].main.temp;
+            const humidity = daysArray[i].main.humidity;
+
+            // $(`#day-${index}`).append( {
+            // // date: <h5> + <br>
+            // // icon: getIconElement(code)
+            // // temp: <p>
+            // // humidity: <p> } )
+        }
     });
 };
 
 function getIconElement(code) {
-    // get URL from icon code and return
     const iconUrl = `http://openweathermap.org/img/wn/${code}@2x.png`;
     return `<img src="${iconUrl}">`
 };
