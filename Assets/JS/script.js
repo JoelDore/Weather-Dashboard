@@ -48,7 +48,7 @@ function getCurrentWeather(cityName) {
         method: 'GET'
     }).then((response) => {
         const city = response.name;
-        const newIcon = getIconElement(response.weather[0].icon);
+        const icon = getIconElement(response.weather[0].icon);
         const temp = response.main.temp;
         const humidity = response.main.humidity;
         const windSpeed = response.wind.speed;
@@ -56,13 +56,12 @@ function getCurrentWeather(cityName) {
         const lon = response.coord.lon;
 
         currentCityEl.text(city);
-        currentIconEl.html(newIcon);
+        currentIconEl.html(icon);
         currentDateEl.text(today.format('M/DD/YYYY'));
         currentTempEl.text(temp);
         currentHumidityEl.text(humidity);
         currentWindSpeedEl.text(windSpeed);
         getUVIndex(lat, lon);
-        colorUVIndex();
     });
 };
 
@@ -95,12 +94,21 @@ function getUVIndex(lat, lon) {
         url: queryURL,
         method: 'GET'
     }).then((response) => {
-        // update #uvIndex text
+        const uvi = response.value;
+        currentUviEl.text(uvi);
+        colorUVIndex(uvi);
     });
 };
 
-function colorUVIndex() {
-    // add appropriate color class
+function colorUVIndex(value) {
+    // Values based on EPA UV Index scale
+    if (value < 3) {
+        currentUviEl.attr('class', 'btn btn-sm btn-success')
+    } else if (value < 7) {
+        currentUviEl.attr('class', 'btn btn-sm btn-warning')
+    } else {
+        currentUviEl.attr('class', 'btn btn-sm btn-danger')
+    }
 }
 
 // My API key: 'd805afa702cbd0d0da430b05b58308fc'
