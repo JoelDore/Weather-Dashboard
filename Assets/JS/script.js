@@ -38,16 +38,16 @@ function handleSearch(cityName) {
 };
 
 function updateSearchHistory() {
-    // ** IF $('#searchHistory').children().length > maxHistoryItems
-    // ** THEN pop last element of children array
+    if (searchHistoryArray.length > MAX_HISTORY_ITEMS) {
+        searchHistoryArray.pop();
+    };
     localStorage.setItem('searchHistory', JSON.stringify(searchHistoryArray));
 
     searchHistoryEl.html('');
-
     for (const city of searchHistoryArray) {
-        const newHistoryEl = $('<button type="button" class="list-group-item list-group-item-action">');
-        newHistoryEl.text(city);
-        searchHistoryEl.append(newHistoryEl)
+        const newHistoryItem = $('<button type="button" class="list-group-item list-group-item-action">');
+        newHistoryItem.text(city);
+        searchHistoryEl.append(newHistoryItem)
     }
 
 };
