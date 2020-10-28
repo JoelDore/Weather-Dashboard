@@ -39,7 +39,11 @@ $(document).ready(() => {
 });
 
 function handleSearch(cityName) {
-    // Update history
+    // Update search history
+    if (searchHistoryArray.includes(cityName)) {
+        let rptIndex = searchHistoryArray.indexOf(cityName);
+        searchHistoryArray.splice(rptIndex, 1);
+    };
     searchHistoryArray.unshift(cityName);
     updateSearchHistory();
     // Execute search, unhide results
