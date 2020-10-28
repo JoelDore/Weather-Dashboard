@@ -16,12 +16,6 @@ const MAX_HISTORY_ITEMS = 10;
 let searchHistoryArray;
 let lastSearchedCity;
 
-handlePageLoad();
-// Event listener for #searchHistory li
-$(".list-group-item").click((event) => {
-    handleSearch($(event.target).text());
-});
-
 // Event listener for searchBtn
 searchBtn.click(() => {
     let cityName = searchInputEl.val();
@@ -29,7 +23,7 @@ searchBtn.click(() => {
     searchInputEl.val(''); // Clear search field
 });
 
-function handlePageLoad() {
+$(document).ready(() => {
     // Get search history from storage
     searchHistoryArray = JSON.parse(localStorage.getItem('searchHistory')) || [];
     lastSearchedCity = searchHistoryArray[0];
@@ -41,8 +35,8 @@ function handlePageLoad() {
     } else {
         resultsColumn.addClass('d-none');
         searchColumn.addClass('col-lg-12')
-    }
-}
+    };
+});
 
 function handleSearch(cityName) {
     // Update history
@@ -65,9 +59,11 @@ function updateSearchHistory() {
     for (const city of searchHistoryArray) {
         const newHistoryItem = $('<button type="button" class="list-group-item list-group-item-action">');
         newHistoryItem.text(city);
-        searchHistoryEl.append(newHistoryItem)
-    }
-
+        newHistoryItem.click((event) => {
+            handleSearch(event.target.textContent);
+        });
+        searchHistoryEl.append(newHistoryItem);
+    };
 };
 
 function getCurrentWeather(cityName) {
