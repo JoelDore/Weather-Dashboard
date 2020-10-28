@@ -1,7 +1,9 @@
 const today = dayjs();
+const searchColumn = $("#searchDiv");
 const searchInputEl = $("#searchInput");
 const searchBtn = $("#searchBtn");
 const searchHistoryEl = $("#searchHistory");
+const resultsColumn = $("#resultsDiv");
 const currentCityEl = $("#currentCity");
 const currentIconEl = $("#currentIcon");
 const currentDateEl = $('#currentDate');
@@ -11,12 +13,10 @@ const currentWindSpeedEl = $("#windSpeed");
 const currentUviEl = $("#uvIndex");
 
 const MAX_HISTORY_ITEMS = 10;
+let searchHistoryArray;
+let lastSearchedCity;
 
-// Get search history from local storage
-let searchHistoryArray = JSON.parse(localStorage.getItem('searchHistory')) || [];
-updateSearchHistory();
-let lastSearchedCity = '';
-
+handlePageLoad();
 // Event listener for #searchHistory li
 $(".list-group-item").click((event) => {
     handleSearch($(event.target).text());
@@ -29,12 +29,30 @@ searchBtn.click(() => {
     searchInputEl.val(''); // Clear search field
 });
 
+function handlePageLoad() {
+    // Get search history from storage
+    searchHistoryArray = JSON.parse(localStorage.getItem('searchHistory')) || [];
+    lastSearchedCity = searchHistoryArray[0];
+    updateSearchHistory();
+    // Load data for most recent search
+    if (lastSearchedCity) {
+        getCurrentWeather(lastSearchedCity);
+        getForecastWeather(lastSearchedCity);
+    } else {
+        resultsColumn.addClass('d-none');
+        searchColumn.addClass('col-lg-12')
+    }
+}
+
 function handleSearch(cityName) {
+    // Update history
     searchHistoryArray.unshift(cityName);
-    updateSearchHistory(cityName);
-    // Execute search
+    updateSearchHistory();
+    // Execute search, unhide results
     getCurrentWeather(cityName);
     getForecastWeather(cityName);
+    resultsColumn.removeClass('d-none');
+    searchColumn.removeClass('col-lg-12')
 };
 
 function updateSearchHistory() {
