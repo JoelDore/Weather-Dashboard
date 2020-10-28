@@ -7,7 +7,7 @@
 </div>
 <br>
 
-### A weather dashboard featuring current conditions and 5-day forecast
+### _Weather dashboard featuring current conditions and a 5-day forecast_
 
 ![Demo](./Assets/Images/demo.gif)
 
@@ -30,7 +30,7 @@ Currently deployed at [GitHub Pages](https://joeldore.github.io/Weather-Dashboar
 ---
 ## Future Development
 
-- Add option for user to remove items from search history
+- Add option for user to remove items from or limit length of search history
 
 - Add option for user to select Metric or Imperial units
 
